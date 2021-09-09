@@ -4,9 +4,18 @@ void __stack::__MallocMemory(Word_t __tam)
 {
     if (__tam <= 0)
         exit(1);
-    __stack::__Memory = new Word_t[__tam];
-    if(!__stack::__Memory)
+    __stack::__Memory = (Word_t *)malloc(__tam);
+    if (!__stack::__Memory)
         exit(2);
+}
+
+void __stack::__ValidMemory()
+{
+    if (__stack::PC > __stack::Buffer)
+    {
+        std::cout << "Stack overflow" << std::endl;
+        exit(3);
+    }
 }
 
 void __stack::__WriteMemory(Word_t __addr, Word_t __dice)
@@ -25,7 +34,8 @@ void __stack::stack_push(Word_t __dice)
     __stack::BS -= 2;
     __stack::__WriteMemory(__stack::SP, __dice & 0xff);
     __stack::__WriteMemory(__stack::BS, (__dice >> 8) & 0x1);
-    __stack::PC++;
+    __stack::PC += 2;
+    __stack::__ValidMemory();
 }
 
 Word_t __stack::stack_pop()
@@ -47,6 +57,14 @@ Word_t __stack::stack_sign()
     return Read;
 }
 
+bool __stack::stack_empty()
+{
+    if(__stack::PC == 0)
+        return true;
+    else 
+        return false;
+}
+
 __stack::Stack(Word_t __tam)
 {
     __stack::Buffer = __tam;
@@ -57,4 +75,5 @@ __stack::Stack(Word_t __tam)
 }
 
 __stack::~Stack()
-{}  
+{
+}
