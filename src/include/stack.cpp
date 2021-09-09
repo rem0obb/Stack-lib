@@ -54,7 +54,7 @@ Word_t __stack::stack_pop()
 Word_t __stack::stack_size()
 {
     __stack::__ValidMemory();
-    return __stack::PC;
+    return __stack::PC-=1;
 }
 
 Word_t __stack::stack_sign()
