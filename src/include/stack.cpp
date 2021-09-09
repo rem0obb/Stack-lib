@@ -53,11 +53,13 @@ Word_t __stack::stack_pop()
 
 Word_t __stack::stack_size()
 {
+    __stack::__ValidMemory();
     return __stack::PC;
 }
 
 Word_t __stack::stack_sign()
-{
+{    
+    __stack::__ValidMemory();
     Word_t Read = __stack::__ReadMemory(__stack::BS);
     __stack::BS += 2;
     return Read;
