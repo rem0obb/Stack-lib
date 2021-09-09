@@ -2,7 +2,7 @@
 
 ## Help
 
-for usage stack created obj `Stack stack(10)` and allocate 10, for stack `stack_push(0x15)` 
+for usage stack created obj `__stack stack(10)` and allocate 10, for stack `stack_push(0x15)` 
 
 for unstack `stack_pop()` 
 
