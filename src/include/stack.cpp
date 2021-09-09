@@ -16,6 +16,11 @@ void __stack::__ValidMemory()
         std::cout << "Stack overflow" << std::endl;
         exit(3);
     }
+    if(__stack::PC < __stack::Buffer)
+    {
+        std::cout << "Stack empty" << std::endl;
+        exit(4);
+    }
 }
 
 void __stack::__WriteMemory(Word_t __addr, Word_t __dice)
@@ -40,6 +45,7 @@ void __stack::stack_push(Word_t __dice)
 
 Word_t __stack::stack_pop()
 {
+    __stack::__ValidMemory();
     Word_t Read = __stack::__ReadMemory(__stack::SP);
     __stack::SP += 2;
     return Read;
