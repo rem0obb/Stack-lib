@@ -84,5 +84,5 @@ __stack::Stack(Word_t __tam)
 
 __stack::~Stack()
 {
-    delete[] this->__Memory;
+    
 }
