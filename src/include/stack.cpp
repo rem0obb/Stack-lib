@@ -16,7 +16,7 @@ void __stack::__ValidMemory()
         std::cout << "Stack overflow" << std::endl;
         exit(3);
     }
-    if(__stack::PC < __stack::Buffer)
+    if(__stack::PC == 0)
     {
         std::cout << "Stack empty" << std::endl;
         exit(4);
