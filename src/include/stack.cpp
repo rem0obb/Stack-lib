@@ -7,12 +7,12 @@ void __stack::__MallocMemory(Word_t __tam)
     this->__Memory = new Word_t[__tam];
     if (!this->__Memory)
         exit(2);
+
 }
 
 void __stack::__FreeMemory()
 {
-    this->__Memory = nullptr;
-    delete[] this->__Memory;
+    delete[] this->__Memory;    
 }
 
 void __stack::__ValidMemory()
@@ -41,7 +41,7 @@ Word_t __stack::__ReadMemory(Word_t __addr)
 
 void __stack::stack_push(Word_t __dice)
 {
-    this->SP -= 2;
+    this->SP += 2;
     this->BS -= 2;
     this->__WriteMemory(this->SP, __dice & 0xff);
     this->__WriteMemory(this->BS, (__dice >> 8) & 0x1);
@@ -53,8 +53,9 @@ Word_t __stack::stack_pop()
 {
     this->__ValidMemory();
     Word_t Read = this->__ReadMemory(this->SP);
-    this->SP += 2;
+    this->SP -= 2;
     return Read;
+
 }
 
 Word_t __stack::stack_size()
