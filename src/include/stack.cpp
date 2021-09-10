@@ -9,6 +9,12 @@ void __stack::__MallocMemory(Word_t __tam)
         exit(2);
 }
 
+void __stack::__FreeMemory()
+{
+    this->__Memory = nullptr;
+    delete[] this->__Memory;
+}
+
 void __stack::__ValidMemory()
 {
     if (this->PC > this->Buffer)
@@ -16,7 +22,7 @@ void __stack::__ValidMemory()
         std::cout << "Stack overflow" << std::endl;
         exit(3);
     }
-    if(this->PC == 0)
+    if (this->PC == 0)
     {
         std::cout << "Stack empty" << std::endl;
         exit(4);
@@ -54,11 +60,11 @@ Word_t __stack::stack_pop()
 Word_t __stack::stack_size()
 {
     this->__ValidMemory();
-    return this->PC-=1;
+    return this->PC -= 1;
 }
 
 Word_t __stack::stack_sign()
-{    
+{
     this->__ValidMemory();
     Word_t Read = this->__ReadMemory(this->BS);
     this->BS += 2;
@@ -67,9 +73,9 @@ Word_t __stack::stack_sign()
 
 bool __stack::stack_empty()
 {
-    if(this->PC == 0)
+    if (this->PC == 0)
         return true;
-    else 
+    else
         return false;
 }
 
@@ -84,5 +90,5 @@ __stack::Stack(Word_t __tam)
 
 __stack::~Stack()
 {
-    
+    this->__FreeMemory();
 }
