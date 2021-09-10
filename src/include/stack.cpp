@@ -83,7 +83,7 @@ bool __stack::stack_empty()
 __stack::Stack(Word_t __tam)
 {
     this->Buffer = __tam;
-    this->SP = 0x02;
+    this->SP = 0x00;
     this->PC = 0x00;
     this->BS = 0x01;
     this->__MallocMemory(this->Buffer);
