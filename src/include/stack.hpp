@@ -16,6 +16,7 @@ private:
     Word_t Buffer;    // buffer size
 
     void __MallocMemory(Word_t __tam);
+    void __FreeMemory();
     void __ValidMemory();
     void __WriteMemory(Word_t __addr, Word_t __dice);
     Word_t __ReadMemory(Word_t __addr);
