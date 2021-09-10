@@ -23,7 +23,7 @@ for verify stack empty `stack_empty()` return bool
 
   __stack stack(2);
 
-  stack.push(0x15);
+  stack.stack_push(0x15);
   printf("pop=%u\n", stack.stack_pop());
 
 ```
@@ -34,6 +34,6 @@ for verify stack empty `stack_empty()` return bool
 
 > based in stack intel 8080
 
-> to add data to the stack of 2 allocation is required, first significant data and second 8 bit least significant data
+> to add data to the stack of 2 allocation is required, first significant data and second 8 bits least significant data
 
 > int type stack support
