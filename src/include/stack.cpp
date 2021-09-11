@@ -84,7 +84,7 @@ __stack::Stack(Word_t __tam)
     Buffer = __tam;
     SP = 0x00;
     PC = 0x00;
-    BS = 0x01;
+    BS += 0x01;
     __MallocMemory(Buffer);
 }
 
