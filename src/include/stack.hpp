@@ -1,4 +1,3 @@
-// Stack Based in intel-8080
 // Copyright (c) 2021 VitorMob
 // All rights reserved.
 
