@@ -4,7 +4,7 @@
 
 ## Help
 
-for usage stack create obj `__stack stack(2)` and allocate 2 
+for usage stack create obj `__stack stack(1)` and allocate 2 
 
 for stack up `stack_push(0x15)` 
 
@@ -21,7 +21,7 @@ for verify stack empty `stack_empty()` return bool
 
 ```C++
 
-  __stack stack(2);
+  __stack stack(1);
 
   stack.stack_push(0x15);
   printf("pop=%u\n", stack.stack_pop());
@@ -32,6 +32,5 @@ for verify stack empty `stack_empty()` return bool
 
 > lib stack in process
 
-> to add data to the stack of 2 allocation is required, first significant data and second 8 bits least significant data
 
 > int type stack support
