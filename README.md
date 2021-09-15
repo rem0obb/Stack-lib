@@ -32,8 +32,6 @@ for verify stack empty `stack_empty()` return bool
 
 > lib stack in process
 
-> based in stack intel 8080
-
 > to add data to the stack of 2 allocation is required, first significant data and second 8 bits least significant data
 
 > int type stack support
