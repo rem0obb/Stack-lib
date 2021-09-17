@@ -40,10 +40,9 @@ Word_t __stack::__ReadMemory(Word_t __addr)
 
 void __stack::stack_push(Word_t __dice)
 {
-    SP += 2;
-    PC += 2;
-    __WriteMemory(SP, __dice & 0xff);
+    __WriteMemory(SP += 2, __dice & 0xff);
     __WriteMemory(BS += 2, (__dice >> 8) & 0x1);
+    PC += 2;
     __ValidMemory();
 }
 
