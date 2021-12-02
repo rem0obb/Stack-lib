@@ -34,3 +34,5 @@ for verify stack empty `stack_empty()` return bool
 
 
 > int type stack support
+
+> not use :) is stack for studing, recommend using by default in your projects stack library STL
