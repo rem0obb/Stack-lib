@@ -1,38 +1,45 @@
 # Stack
 
-![img](imgs/stack.png)
-
 ## Help
 
-for usage stack create obj `__stack stack(1)` and allocate 2 
+for usage stack create obj `Stack stack(2)` and allocate 1 
 
-for stack up `stack_push(0x15)` 
+for stack up `stack.push(0x15)` 
 
-for unstack `stack_pop()` 
-
-for get bit significative `stack_sign()`
-
-for get size stack `stack_size()`
-
-for verify stack empty `stack_empty()` return bool
-
+for unstack `stack.pop()` 
 
 > example
 
 ```C++
+  #include "include/stack.hpp"
+  
+  int main()
+  {
+   Stack stack(6);
+  
+  stack.push(0x42);
+  stack.push(0x4f);
+  stack.push(0x4d);
+ 
+  std::cout << (char)stack.pop() << (char)stack.pop() << (char)stack.pop() << std::endl;
+ 
+  return 0;
+ }
+```
 
-  __stack stack(1);
+## Compiler example
 
-  stack.stack_push(0x15);
-  printf("pop=%u\n", stack.stack_pop());
+```
+mkdir build
+
+cd build
+
+cmake ..
+
+make
 
 ```
 
 ## Notes 
 
-> lib stack in process
-
-
-> int type stack support
-
-> not use :) is stack for studing, recommend using by default in your projects stack library STL
+> Stack based in intel 8080

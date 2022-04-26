@@ -1,33 +1,28 @@
 // Copyright (c) 2021 VitorMob
 // All rights reserved.
 
-#include <iostream>
+#include <stdint.h>
 
-typedef int16_t Word_t;
 
-typedef class Stack
+typedef uint16_t word_t;
+typedef uint8_t byte_t;
+
+struct Stack
 {
-private:
-    Word_t BS;        // byte sign
-    Word_t SP;        // stack pointer
-    Word_t PC;        // program counter
-    Word_t *__Memory; // memory allocated
-    Word_t Buffer;    // buffer size
+  word_t m_SP;
+  byte_t *m_memory;
+  word_t m_size;
 
-    void __MallocMemory(Word_t __tam);
-    void __FreeMemory();
-    void __ValidMemory();
-    void __WriteMemory(Word_t __addr, Word_t __dice);
-    Word_t __ReadMemory(Word_t __addr);
+  inline byte_t read_memory_byte ( word_t addr );
+  inline word_t read_memory_word ( word_t addr );
+  inline void write_memory_byte ( word_t addr, byte_t data16 );
+  inline void write_memory_word ( word_t addr, word_t data16 );
 
-public:
-    Stack(Word_t __tam);
-    ~Stack();
-
-    void stack_push(Word_t __dice);
-    Word_t stack_pop();
-    Word_t stack_size();
-    Word_t stack_sign();
-    bool stack_empty();
-
-} __stack;
+ public:
+  Stack ( word_t = 65535 );
+  Stack ( const Stack & );
+  Stack operator= ( const Stack & );
+  ~Stack();
+  void push ( word_t );
+  word_t pop();
+};

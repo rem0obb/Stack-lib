@@ -1,92 +1,72 @@
 #include "stack.hpp"
+#include <string.h>
+#include <iostream>
 
-void __stack::__MallocMemory(Word_t __tam)
+Stack::Stack ( word_t p_size ) : m_SP ( p_size ), m_size ( p_size )
 {
-    if (__tam <= 0)
-        exit(1);
-    __Memory = new Word_t[__tam];
-    if (!__Memory)
-        exit(2);
+  m_memory = new byte_t[p_size];
 }
 
-void __stack::__FreeMemory()
+Stack::Stack ( const Stack &p_stack )
 {
-    delete[] __Memory;
+  delete [] m_memory;
+
+  m_size = p_stack.m_size;
+  m_memory = new byte_t[p_stack.m_size];
+  memcpy ( m_memory, p_stack.m_memory, p_stack.m_size );
+  m_SP = p_stack.m_SP;
+
 }
 
-void __stack::__ValidMemory()
+Stack Stack::operator= ( const Stack &p_stack )
 {
-    if (PC > Buffer)
-    {
-        std::cout << "Stack overflow" << std::endl;
-        exit(3);
-    }
-    if (PC == 0)
-    {
-        std::cout << "Stack empty" << std::endl;
-        exit(4);
-    }
+  delete [] m_memory;
+
+  m_size = p_stack.m_size;
+  m_memory = new byte_t[p_stack.m_size];
+  memcpy ( m_memory, p_stack.m_memory, p_stack.m_size );
+  m_SP = p_stack.m_SP;
+
+  return *this;
 }
 
-void __stack::__WriteMemory(Word_t __addr, Word_t __dice)
+Stack::~Stack()
 {
-    __Memory[__addr] = __dice;
+  delete [] m_memory;
 }
 
-Word_t __stack::__ReadMemory(Word_t __addr)
+void Stack::push ( word_t data16 )
 {
-    return __Memory[__addr];
+  m_SP -= 2;
+  write_memory_word ( m_SP, data16 );
 }
 
-void __stack::stack_push(Word_t __dice)
+word_t Stack::pop()
 {
-    __WriteMemory(SP += 2, __dice & 0xff);
-    __WriteMemory(BS += 2, (__dice >> 8) & 0x1);
-    PC += 2;
-    __ValidMemory();
+  word_t mem = read_memory_word ( m_SP );
+  m_SP += 2;
+  return mem;
 }
 
-Word_t __stack::stack_pop()
+
+inline byte_t Stack::read_memory_byte ( word_t addr )
 {
-    __ValidMemory();
-    Word_t Read = __ReadMemory(SP);
-    PC--;
-    SP -= 2;
-    return Read;
+  return m_memory[addr];
 }
 
-Word_t __stack::stack_size()
+inline word_t Stack::read_memory_word ( word_t addr )
 {
-    __ValidMemory();
-    return PC;
+  return read_memory_byte ( addr + 1 ) << 8 |
+         read_memory_byte ( addr );
 }
 
-Word_t __stack::stack_sign()
+inline void Stack::write_memory_byte ( word_t addr, byte_t data16 )
 {
-    __ValidMemory();
-    Word_t Read = __ReadMemory(BS);
-    BS -= 2;
-    return Read;
+  m_memory[addr] = data16;
 }
 
-bool __stack::stack_empty()
+inline void Stack::write_memory_word ( word_t addr, word_t data16 )
 {
-    if (PC == 0)
-        return true;
-    else
-        return false;
-}
-
-__stack::Stack(Word_t __tam)
-{
-    Buffer = __tam*2;
-    SP = 0;
-    PC = 0;
-    BS = 1;
-    __MallocMemory(Buffer);
-}
-
-__stack::~Stack()
-{
-    __FreeMemory();
+  write_memory_byte ( addr, data16 );
+  write_memory_byte ( addr + 1, data16 >> 8 );
 }
